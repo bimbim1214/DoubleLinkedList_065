@@ -34,7 +34,7 @@ void DoubleLinkedList::addNode() {
 
 	Node* newNode = new Node(); //step 1
 	newNode->noMhs = nim; //step 2
-	newNode->name = nm; //step 2
+	newNode->nama = nm; //step 2
 
 	/*insert a node in the begining of a doubly - linked list*/
 	if (START == NULL || nim <= START->noMhs) {
@@ -82,5 +82,21 @@ bool DoubleLinkedList::search(int rollNo, Node** previous, Node** current) {
 	return (*current != NULL);
 }
 
+
+bool DoubleLinkedList::deleteNode(int rollNo) {
+	Node* previous, * current;
+	previous = current = NULL;
+	if (search(rollNo, &previous, &current) == false)
+		return false;
+	if (current->next != NULL)
+		current->next->prev = previous;
+	if (previous != NULL)
+		previous->next = current->next;
+	else
+		START = current->next;
+
+	delete current;
+	return true;
+}
 
 
